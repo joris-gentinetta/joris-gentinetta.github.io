@@ -778,8 +778,8 @@ html, body {
 
 /* HERO
 ================================================== */
-.hero { 
-    background: url(../img/hero.jpg) no-repeat center / cover; 
+.hero {
+    background: url(../photos/mountains_1.jpg) no-repeat center / cover;
     height: 100%;
     width: 100%;
     display: table;
@@ -874,7 +874,7 @@ html, body {
 }
 
 .portfolio-hero {
-    background: url(../img/portfolio-hero.jpg) no-repeat center / cover;     
+    background: url(../photos/mountains_2.jpg) no-repeat center / cover;
 }
 
 .blog-hero {
@@ -1177,6 +1177,11 @@ a.twitter-bg:hover {
 a.facebook-bg {
   color: #3b5998;
   border-color: #3b5998;
+}
+
+a.instagram-bg {
+  color: #E1306C;
+  border-color: #E1306C;
 }
 
 a.facebook-bg:hover{
