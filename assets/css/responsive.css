@@ -518,11 +518,16 @@
 	.project-img {
 		height: 240px;
 	}
+	.project-img-cust {
+		height: 240px;
+	}
 
 	.project-img + .project-img {
 		margin-top: 15px;
 	}
-
+	.project-img-cust + .project-img-cust {
+		margin-top: 15px;
+	}
 	.project-info h5,
 	.project-info .btn,
 	.project-info .social-links {
