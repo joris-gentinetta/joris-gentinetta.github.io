@@ -1,0 +1,19 @@
+<header id="masthead" class="site-header{% unless page.is_home %} site-header-white{% endunless %}">
+    <nav id="primary-navigation" class="site-navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="{{ '/' | relative_url }}" class="site-title"><span>Joris Gentinetta</span></a>
+            </div><!-- /.navbar-header -->
+
+            {% unless page.is_home %}
+            <div class="collapse navbar-collapse" id="agency-navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{ '/projects/' | relative_url }}">Projects</a></li>
+                    <li><a href="{{ '/skills/' | relative_url }}">Skills</a></li>
+                    <li><a href="{{ '/contact/' | relative_url }}">Contact</a></li>
+                </ul>
+            </div>
+            {% endunless %}
+        </div>
+    </nav><!-- /.site-navigation -->
+</header><!-- /#masthead -->

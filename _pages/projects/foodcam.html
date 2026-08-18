@@ -1,0 +1,39 @@
+---
+layout: project
+title: MIT Media Lab Foodcam Bot
+project_title: MIT Media Lab Foodcam Bot
+year: "2024"
+categories:
+  - computer_vision
+  - fun
+permalink: /projects/foodcam/
+---
+
+<div class="post-content">
+    <h2>Intro</h2>
+    I did my Master's thesis in the Biomechatronics group at the MIT Media Lab. There are a lot
+    of events at the Media Lab,
+    and leftover food is always placed in the same spot with a webcam pointed at it. After the
+    food is placed there, a button is pressed,
+    and everybody gets a notification that there is food available. This of course starts a race
+    for the food, and the first people to arrive get the best pickings.
+    <br><br>
+    To create a competitive advantage for me and my research group, I built a bot that
+    continuously monitors the foodcam and sends a notification to a Slack channel when food is
+    detected.
+    Additionally, you can select the food you are interested in and the bot will notify you when
+    it is detected.
+</div><!-- /.post-content -->
+
+<div class="project-img">
+    <img src="{{ '/assets/projects/foodcam/description_page.jpg' | relative_url }}" class="img-res1" alt="">
+    <div style="text-align: center;"> Slack application description page.</div>
+</div><!-- /.project-img -->
+
+<div class="post-content">
+    <h2>Software</h2>
+    The bot is based on the slack API and a
+    <a href="https://huggingface.co/google/vit-base-patch16-224-in21k"> Vision Transformer
+        pre-trained on ImageNet-21k</a> and
+    <a href="https://huggingface.co/nateraw/food">finetuned on the food-101 dataset</a>.
+</div><!-- /.post-content -->

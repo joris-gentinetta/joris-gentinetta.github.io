@@ -1,0 +1,125 @@
+---
+layout: project
+title: Computation Cluster in my Basement
+project_title: Computation Cluster in my Basement
+year: "2021/22"
+categories:
+  - robotics
+  - data_science
+permalink: /projects/computation_cluster/
+---
+
+<div class="post-content">
+    <h2>Intro</h2>
+    As very little information about the dataset in the Numerai turnament is
+    released,
+    the search for optimal models and parameters isn't as guided as in other projects. A big
+    number of
+    experiments was necessary and
+    taking the size of the dataset into account, it was clear that I couldn't perform them all
+    on my
+    laptop. I trained some models on AWS,
+    but quickly realised that it would be very costly to try out all my ideas, so I started
+    looking for
+    second hand hardware to buy.
+    I found out that companies throw out old servers at low prices and decided for a rack
+    system.
+</div><!-- /.post-content -->
+
+<div class="project-img">
+    <img src="{{ '/assets/projects/computation_cluster/server_project_image.jpg' | relative_url }}" class="img-res1" alt="">
+    <div style="text-align: center;"> The finished cluster with all components.</div>
+</div><!-- /.project-img -->
+
+<div class="post-content">
+    <h2>Composition</h2>
+    An old laptop of mine, stripped to its essential parts and placed inside a rack mountable
+    case is
+    allways turned on and acts as:<br>
+    &nbsp; - Router<br>
+    &nbsp; - VPN server<br>
+    &nbsp; - Job Manager<br>
+    It will be called controller from now on.
+    The controller is connnected to the WIFI and acts as a router to the servers. The servers
+    iLO and
+    internet ports are connected
+    to the controller via a switch. To access the server subnet from an external device, the
+    controller
+    also acts as a VPN server. It is always on and waits for new jobs.
+</div><!-- /.post-content -->
+
+<div class="project-img">
+    <img src="{{ '/assets/projects/computation_cluster/network_diagram.png' | relative_url }}" class="img-res2" alt="">
+    <div style="text-align: center;"> Network Diagram of the cluster.</div>
+</div><!-- /.project-img -->
+
+<div class="post-content">
+    <h2>Job Handling Overview</h2>
+    To send a job to the cluster, I wrote a client script to which you have to specify:
+    <ul>
+        <li>Project folder path</li>
+        <li>Name of the entrypoint script (e.g. main.py)</li>
+        <li>Number of CPU cores required</li>
+        <li>Amount of RAM required</li>
+    </ul>
+
+    The script then uses a VPN connection to the controller to copy the project folder, and
+    place the job
+    description in the jobs folder of the controller. Every 2 minutes the controller:
+    <ul>
+        <li>Checks the jobs folder for new jobs and places them in the queue.</li>
+        <li>Tries to distribute the jobs in the queue to the running servers according to their
+            requirements.
+        </li>
+        <li>Starts up a new server in case not all jobs could be distributed.</li>
+        <li>Shuts down any idle servers.</li>
+    </ul>
+
+    When a job is finished, the return data including stdout/stderr are copied back to the
+    controller.
+    There is a script that copies the return data of all finished jobs from the controller back
+    to the client.
+</div><!-- /.post-content -->
+
+<div class="post-content">
+    <h2>Job Handling Script</h2>
+    This script runs on the controller.
+    There is a SERVER and a JOB class. In the beginning one SERVER object per physical server is
+    initialised
+    with the corresponding attributes (server id, ip address, available RAM, ...). Two threads
+    are started,
+    one to handle the job queue, the other one to host the website with current cluster status
+    information.
+    The job queue thread checks the jobs folder every two minutes, when a new job arrives it
+    creates a JOB
+    object and places it in the queue. It then tries to distribute the jobs in the queue by
+    sending them to
+    the running server with the least available resources that still fulfills the requirements.
+    This is done
+    to optimise the number of jobs that can be run in parallel (knapsack problem). To run a job
+    on a server,
+    the SERVER.run_job subroutine is called in a new thread, where:
+    <ul>
+        <li>The job is appended to SERVER.running_jobs</li>
+        <li>The jobs required resources are subtracted from SERVER.available_RAM and
+            .available_CPU
+        </li>
+        <li>The project folder is copied from the controller to the server.</li>
+        <li>A screen session is started on the server, where a new venv according to
+            requirements.txt in
+            the
+            project folder is created and the specified entrypoint script is run. stdout/stderr
+            is redirected to the
+            jobs return folder together with the output files of the script.
+        </li>
+        <li>Every 2 minutes the thread checks whether the screen session is still running on the
+            server,
+            if not it considers the job done and proceeds.
+        </li>
+        <li>The return folder is copied from the server to the controller.</li>
+        <li>The job is removed from SERVER.running_jobs</li>
+        <li>The jobs required resources are added to SERVER.available_RAM and .available_CPU
+        </li>
+        <li>The job thread is killed.</li>
+    </ul>
+</div><!-- /.post-content -->

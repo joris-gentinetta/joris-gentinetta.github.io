@@ -1,0 +1,43 @@
+---
+layout: default
+---
+
+<div id="hero" class="hero overlay subpage-hero blog-hero">
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1>{{ page.project_title }}</h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ '/' | relative_url }}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ '/projects/' | relative_url }}">Projects</a></li>
+                <li class="breadcrumb-item active">{{ page.project_title }}</li>
+            </ol>
+        </div><!-- /.hero-text -->
+    </div><!-- /.hero-content -->
+</div><!-- /.hero -->
+
+<main id="main" class="site-main">
+    <section class="site-section subpage-site-section section-blog">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <article class="blog-post">
+                        {{ content }}
+
+                        <div class="post-meta">
+                            <span class="post-date">
+                                <a><i class="fa fa-calendar" aria-hidden="true"></i> {{ page.year }}</a>
+                            </span>
+                            {% for cat_id in page.categories %}
+                                {% assign category = site.data.categories | where: "id", cat_id | first %}
+                                <span class="post-category">
+                                    <a href="{{ '/categories/' | relative_url }}{{ cat_id }}/"><i class="fa fa-folder" aria-hidden="true"></i> {{ category.name }}</a>
+                                </span>
+                            {% endfor %}
+                        </div><!-- /.post-meta -->
+                    </article><!-- /.blog-post -->
+                </div>
+                {% include sidebar.html %}
+            </div>
+        </div>
+    </section><!-- /.section-portfolio -->
+</main><!-- /#main -->

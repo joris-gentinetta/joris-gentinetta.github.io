@@ -1,0 +1,52 @@
+---
+layout: project
+title: Mosquito FLAK
+project_title: Mosquito FLAK
+year: "2022"
+categories:
+  - fun
+  - computer_vision
+permalink: /projects/mosquito_FLAK/
+---
+
+<div class="post-content">
+    <h2>Intro</h2>
+    A Raspberry Pi powered device to autonomously shoot down mosquitos with an engraving laser.
+</div><!-- /.post-content -->
+
+<div class="project-img">
+    <img src="{{ '/assets/projects/mosquito_FLAK/mosquito_FLAK_cad.png' | relative_url }}" class="img-res1" alt="">
+    <div style="text-align: center;"> CAD drawing of the tower.</div>
+</div><!-- /.project-img -->
+
+<div class="post-content">
+    <h2>Software</h2>
+    I started with the detection algorithm, testing with my laptop webcam and a black painted bb
+    gun ball. To keep the computational load on the Raspberry low and enable high framerate, no
+    ML is involved, the detection works trough pixel gradients. To approximate the gradient, the
+    last frame is subtracted from the current frame. The result is gaussian filtered to reduce
+    the influence of noise, and the suspected position of the mosquito is taken as the position
+    of the maximum change value in the image. If the position makes for a plausible trajectory
+    of the mosquito (meaning that it is not too far from the last estimated position), the
+    trajectory counter is increased, otherwise it is set to 0. If the trajectory counter is at
+    the threshold value, it is considered likely that we are indeed tracking a mosquito and the
+    FLAK is ready to fire. When there is no movement between two frames and the FLAK is ready to
+    fire, it shoots the laser at the last known position of the mosquito, assuming that it is
+    sitting on a wall.
+    To map between pixel coordinate of the mosquito and servo position of the laser, the
+    surveilled area is mapped beforehand. The laser is shot at equally spaced intervals of the
+    servo postions and the pixel coordinates of the beam are recorded. This gives a rough
+    mapping between servo positions and pixel coordinates, that has to be inverted. Pixel
+    coordinates between the grid points are interpolated.
+</div><!-- /.post-content -->
+
+<div class="post-content">
+    <h2>Hardware</h2>
+    For the hardware I took a CAD plan of a case for the Raspberry Pi and designed the cannon
+    tower and camera mount on top of it.
+</div><!-- /.post-content -->
+
+<div class="project-img">
+    <img src="{{ '/assets/projects/mosquito_FLAK/mosquito_FLAK_prototype.png' | relative_url }}" class="img-res2" alt="">
+    <div style="text-align: center; padding-top: 10px"> First prototype.</div>
+</div><!-- /.project-img -->

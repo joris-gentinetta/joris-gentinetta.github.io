@@ -1,0 +1,54 @@
+---
+layout: project
+title: Biophysical Models With Adaptive Online Learning for Direct Neural Control of Prostheses
+project_title: Biophysical Models With Adaptive Online Learning for Direct Neural Control of Prostheses
+year: "2025"
+categories:
+  - neurotechnology
+  - computer_vision
+  - robotics
+permalink: /projects/biophysical_models/
+---
+
+<div class="post-content">
+    <h2>Background</h2>
+    Direct neural control predicts continuous movement across the independent degrees of
+    freedom of a multi-articulating prosthetic hand, enabling far more dexterous manipulation
+    than the discrete whole-hand poses offered by conventional pattern recognition systems.
+    However, direct control has remained largely confined to research settings, while pattern
+    recognition remains popular for its simple, user-friendly training procedure. This project
+    set out to combine the flexibility of pattern-recognition-style training with the
+    performance of direct neural control.
+</div><!-- /.post-content -->
+
+<div class="project-img">
+    <object data="{{ '/assets/projects/biophysical_models/poster.pdf' | relative_url }}" type="application/pdf"
+            width="100%" height="1100">
+        <p>It appears you don't have a PDF plugin for this browser. You can <a
+                href="{{ '/assets/projects/biophysical_models/poster.pdf' | relative_url }}">click here to download
+            the PDF file.</a></p>
+    </object>
+    <div style="text-align: center;"></div>
+</div><!-- /.project-img -->
+
+<div class="post-content">
+    <h2>Approach</h2>
+    We designed a direct neural controller, driven by surface EMG, that explicitly models
+    musculoskeletal dynamics: a biophysical muscle model and joint model constrain the predicted
+    kinetics and kinematics to a physiologically realizable manifold with a neural network to predict
+    virtual muscle activation from surface EMG. The full pipeline supports adaptive online retraining,
+    letting users correct for temporal drift or add new movements from a single RGB camera rather than
+    a full motion-capture setup.
+    <br><br>
+    In experiments with eight biologically intact participants and two individuals with
+    unilateral transradial amputation, the model predicted trajectories for seven degrees of
+    freedom and after perturbation returned to baseline performance within minutes of online learning.
+</div><!-- /.post-content -->
+
+<div class="post-content">
+    <h2>References</h2>
+    [1] J. Gentinetta, M. F. Fernandez, J. Qiao, M. R. Gonzalez and H. M. Herr, "Biophysical
+    Models With Adaptive Online Learning for Direct Neural Control of Prostheses," IEEE
+    Transactions on Neural Systems and Rehabilitation Engineering, vol. 33, pp. 3201-3211, 2025,
+    doi: <a href="https://doi.org/10.1109/TNSRE.2025.3599114" target="_blank">10.1109/TNSRE.2025.3599114</a>.
+</div><!-- /.post-content -->

@@ -1,0 +1,21 @@
+<article class="blog-post">
+    <a href="{{ '/projects/' | relative_url }}{{ include.project.id }}/">
+        <img src="{{ '/assets/projects/' | relative_url }}{{ include.project.image }}" class="img-res_projects_page" alt="{{ include.project.title }}">
+    </a>
+    <div class="post-content">
+        <h3 class="post-title"><a href="{{ '/projects/' | relative_url }}{{ include.project.id }}/">{{ include.project.title }}</a></h3>
+        <p>{{ include.project.description }}</p>
+
+        <div class="post-meta">
+            <span class="post-date">
+                <a><i class="fa fa-calendar" aria-hidden="true"></i> {{ include.project.year }}</a>
+            </span>
+            {% for cat_id in include.project.categories %}
+                {% assign category = site.data.categories | where: "id", cat_id | first %}
+                <span class="post-category">
+                    <a href="{{ '/categories/' | relative_url }}{{ cat_id }}/"><i class="fa fa-folder" aria-hidden="true"></i> {{ category.name }}</a>
+                </span>
+            {% endfor %}
+        </div><!-- /.post-meta -->
+    </div><!-- /.post-content -->
+</article><!-- /.blog-post -->

@@ -1,0 +1,17 @@
+- id: neurotechnology
+  name: Neurotechnology
+
+- id: computer_vision
+  name: Computer Vision
+
+- id: data_science
+  name: Data Science
+
+- id: robotics
+  name: Robotics
+
+- id: academic
+  name: Academic
+
+- id: fun
+  name: Fun

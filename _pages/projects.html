@@ -1,0 +1,46 @@
+---
+layout: default
+title: Projects
+permalink: /projects/
+---
+
+<div id="hero" class="hero overlay subpage-hero projects-hero">
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1>Projects</h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ '/' | relative_url }}">Home</a></li>
+                <li class="breadcrumb-item active">Projects</li>
+            </ol>
+        </div><!-- /.hero-text -->
+    </div><!-- /.hero-content -->
+</div><!-- /.hero -->
+
+<main id="main" class="site-main">
+    <section class="site-section subpage-site-section section-blog">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <hr>
+                    <br>
+                    <strong>Note: </strong>Only academic and hobby projects are shown. For information on my professional work at Roche, IBM Research, ABB and the MIT Media Lab, please refer to my <a href="{{ '/assets/CV-Joris_Gentinetta.pdf' | relative_url }}">CV</a>.
+                    <br><br>
+                    <hr>
+                    <br><br><br>
+
+                    {% assign first = true %}
+                    {% for project in site.data.projects %}
+                        {% unless first %}
+                            <br><br>
+                            <hr>
+                            <br><br>
+                        {% endunless %}
+                        {% assign first = false %}
+                        {% include project-card.html project=project %}
+                    {% endfor %}
+                </div>
+                {% include sidebar.html %}
+            </div>
+        </div>
+    </section><!-- /.section-portfolio -->
+</main><!-- /#main -->

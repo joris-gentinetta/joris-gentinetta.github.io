@@ -1,0 +1,33 @@
+# Site settings
+title: Joris Gentinetta
+description: Passionate about ML and Biology.
+url: "https://joris-gentinetta.github.io"
+baseurl: ""
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+
+# Include pages from _pages directory
+include:
+  - _pages
+
+# Exclude from build
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+  - scope:
+      path: "_pages"
+    values:
+      layout: "default"

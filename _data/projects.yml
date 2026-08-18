@@ -1,0 +1,101 @@
+- id: biophysical_models
+  title: Biophysical Models With Adaptive Online Learning for Direct Neural Control of Prostheses
+  description: A direct neural prosthesis controller combining musculoskeletal dynamics with a neural "synergy inversion" model, refined through online learning.
+  year: "2025"
+  image: biophysical_models/main.jpg
+  categories:
+    - neurotechnology
+    - computer_vision
+    - robotics
+
+- id: foodcam
+  title: MIT Media Lab Foodcam Bot
+  description: Slack Bot to detect leftover food up for grabs in the Media Lab.
+  year: "2024"
+  image: foodcam/description_page.jpg
+  categories:
+    - computer_vision
+    - fun
+
+- id: cell_tracking
+  title: Large-Scale Cell Nuclei Tracking
+  description: Segmenting and tracking cells to determine fluorescence over time.
+  year: "2023"
+  image: cell_tracking/demo_2.jpg
+  categories:
+    - academic
+    - computer_vision
+
+- id: robot_monkey
+  title: Robot Monkey
+  description: A robot used to study imitation learning in Marmoset monkeys.
+  year: "2022/23"
+  image: robot_monkey/no_costume.jpg
+  categories:
+    - academic
+    - robotics
+
+- id: mosquito_FLAK
+  title: Mosquito FLAK
+  description: Raspberry Pi powered device to autonomously shoot down mosquitos with a laser.
+  year: "2022"
+  image: mosquito_FLAK/mosquito_FLAK_cad.png
+  categories:
+    - fun
+    - computer_vision
+
+- id: scene_graphs
+  title: Indoor Image Retrieval Using Monocular Scene Graphs
+  description: Solving the changing viewpoint issue in indoor localization through monocular images, by matching images through their learned scene graph representations.
+  year: "2022"
+  image: scene_graphs/main.jpg
+  categories:
+    - academic
+    - data_science
+    - computer_vision
+
+- id: computation_cluster
+  title: Computation Cluster in my Basement
+  description: Built from HP servers thrown out by companies and an old laptop of mine as a controller. Running on a batch job system written by myself.
+  year: "2021/22"
+  image: computation_cluster/server.jpeg
+  categories:
+    - robotics
+    - data_science
+
+- id: numerai
+  title: Numerai Tournament
+  description: Continuous participation in the tournament, working with financial data to predict relative market movements using various machine learning models and architectures.
+  year: "2021/22"
+  image: numerai/main.png
+  categories:
+    - data_science
+
+- id: neural_connectivity_analysis
+  title: Functional Connectivity Analysis Pipeline
+  description: Development of a data analysis pipeline using raw electrophysiological data to evaluate drug-based change of functional connectivity between the ventral hippocampus and the prefrontal cortex during anxiety related tasks. Extracting and evaluating single unit activity, spike-phase locking and movement information.
+  year: "2021"
+  image: neural_connectivity_analysis/functional_connectivity_analysis.jpg
+  categories:
+    - academic
+    - neurotechnology
+    - data_science
+
+- id: optogenetic_stimulation
+  title: Optogenetic Stimulation System
+  description: Development of an LCD and a DLP based system for precise stimulation of neurons on a MEA dish.
+  year: "2020"
+  image: optogenetic_stimulation/main.jpg
+  categories:
+    - academic
+    - neurotechnology
+
+- id: bionic_hand
+  title: Construction of a Bionic Hand
+  description: Construction of a fully functional bionic hand and sensor glove to control it.
+  year: "2016"
+  image: bionic_hand/main.jpg
+  categories:
+    - academic
+    - robotics
+    - neurotechnology

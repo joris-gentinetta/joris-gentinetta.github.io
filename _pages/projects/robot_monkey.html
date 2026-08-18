@@ -1,0 +1,62 @@
+---
+layout: project
+title: Robot Monkey
+project_title: Robot Monkey
+year: "2022/23"
+categories:
+  - academic
+  - robotics
+permalink: /projects/robot_monkey/
+---
+
+<div class="post-content">
+    <h2>Background</h2>
+    During the first three semesters of my master's degree, I was a research assistant at the <a
+        href="https://neurotechnology.ethz.ch">Neurotechnology Group</a> of ETH Zurich.
+    We wanted to study the mechanisms behind imitation learning in Marmoset monkeys and needed a
+    realistically looking robot that could show the monkeys the tasks they were supposed to
+    learn. <br><br>
+
+    I lead the project to built that robot from conception to deployment, after developing the
+    specifications and framework, I recruited and supervised students for different parts of the
+    project.
+</div><!-- /.post-content -->
+
+<div class="project-img">
+    <video class="img-res1" controls poster="{{ '/assets/projects/robot_monkey/no_costume.jpg' | relative_url }}">
+        <source src="{{ '/assets/projects/robot_monkey/no_costume_720p.mp4' | relative_url }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div style="text-align: center;"> The robot without cover, demonstrating smooth movements.</div>
+</div><!-- /.project-img -->
+
+<div class="post-content">
+    <h2>Hardware</h2>
+    Marmoset monkeys are very small and have thin arms, therefore the actuators could not be
+    placed on the robot itself.
+    Instead, the robot is controlled by strings, which are connected to servo motors in the base
+    of the robot.
+    The biggest concern with this kind of design is joints influencing each other, which was
+    solved by routing the strings for distal
+    joints through the rotation axis of proximal joints. Where this was not possible, the
+    strings were routed in a way that both flexor and extensor muscles
+    were affected equally. To mitigate the change in tension that this causes, the servos are
+    spring-mounted.<br><br>
+</div><!-- /.post-content -->
+
+<div class="project-img">
+    <video class="img-res1" controls poster="{{ '/assets/projects/robot_monkey/costume.jpg' | relative_url }}">
+        <source src="{{ '/assets/projects/robot_monkey/costume_720p.mp4' | relative_url }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div style="text-align: center;"> The robot with cover, demonstrating fast movements.</div>
+</div><!-- /.project-img -->
+
+<div class="post-content">
+    <h2>Software</h2>
+    We developed a software framework based on ROS/MoveIt/Gazebo to simulate the robot and plan
+    its movements. In Rviz, the robot can be controlled by dragging its end effectors. The joint
+    angles are then generated through inverse kinematics and interpolated between timesteps to
+    generate smooth movements. When requested through the GUI, the file is sent to the robot and
+    the movements are executed.
+</div><!-- /.post-content -->

@@ -1,0 +1,96 @@
+---
+layout: project
+title: Large-Scale Cell Nuclei Tracking
+project_title: Large-Scale Cell Nuclei Tracking
+year: "2023"
+categories:
+  - academic
+  - computer_vision
+permalink: /projects/cell_tracking/
+---
+
+<div class="post-content">
+    <h2>Background</h2>
+    This project addresses the need for robust and accurate tracking of cell nuclei in
+    multichannel fluorescence microscopy videos with varying intensity levels. Our primary
+    objective is to analyze changes in fluorescence intensity for each cell over time,
+    leveraging a method that formulates tracking as an integer linear programming problem. The
+    project uses fluorescence videos with four different channels, each representing a specific
+    fluorophore located in the cell nuclei which are expressed in the G1 and S parts of the cell
+    growth cycle and decay at different rates.
+</div><!-- /.post-content -->
+
+<div class="project-img">
+    <object data="{{ '/assets/projects/cell_tracking/final-poster.pdf' | relative_url }}" type="application/pdf"
+            width="100%" height="600px">
+        <p>It appears you don't have a PDF plugin for this browser. You can <a
+                href="{{ '/assets/projects/cell_tracking/final-poster.pdf' | relative_url }}">click here to download
+            the PDF file.</a></p>
+    </object>
+    <div style="text-align: center;"></div>
+</div><!-- /.project-img -->
+
+<div class="post-content">
+    <h2>First Approach</h2>
+    We initially approached this problem by merging the channels, finding the cell nuclei
+    through blob detection (Laplacian of Gaussian) and tracking them with a simple Linear
+    Assignment Problem (LAP) tracker [8]. Although this gave reasonable results, it couldn't
+    differentiate cells in dense areas and didn't find cells with low intensity.
+</div><!-- /.post-content -->
+
+<div class="project-img">
+    <video class="img-res1" controls poster="{{ '/assets/projects/cell_tracking/demo_1.jpg' | relative_url }}">
+        <source src="{{ '/assets/projects/cell_tracking/demo_1_720p.mp4' | relative_url }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div style="text-align: center;">
+        ImageJ visualization, using blob detection and LAP tracking.
+    </div>
+</div><!-- /.project-img -->
+
+<div class="post-content">
+    <h2>Second Approach</h2>
+    To improve on this, we independently segment each channel and do
+    the tracking on a combination of these segmentations. For this we rely on recent work by
+    Bragantini et al. [1] which introduced a novel method of using segmentation hypothesis to
+    create a hierarchy of segmentations, optimizing tracking and the final segmentation jointly.
+    They do this by formulating the problem as an Integer Linear Programming (ILP) problem which
+    maximizes the intersection of the union of cell segmentations. This problem considers not
+    just pairs of frames, but all the frames, allowing optimization on a global level. Moreover,
+    the authors embed biological constraints related to cell division, disappearing or appearing
+    in the ILP. <br><br>
+
+    We start with a preprocessing step to remove background noise. This is done by performing
+    morphological reconstruction through dilation to find the "background" and subtracting that
+    out of the original image. We then do a simple normalization while also eliminating low
+    intensity values which remove leftover noise in the image. Next, the frames are segmented
+    to find the cells. We performed an exhaustive search of all combinations of segmentation
+    inputs to the tracking algorithm and have found that using StarDist and Cellpose on each of
+    the preprocessed fluorescence channels independently works best.
+    Finally, we apply a postprocessing step wherein we detect discontinuities in the color
+    composition of a tracked cell. If we detect a large jump in intensity, we split the track at
+    the given time. Finally, we iterate through each of the split tracks to prune tracks that are
+    too short.
+</div><!-- /.post-content -->
+
+<div class="project-img">
+    <video class="img-res1" controls poster="{{ '/assets/projects/cell_tracking/demo_2.jpg' | relative_url }}">
+        <source src="{{ '/assets/projects/cell_tracking/demo_2_720p.mp4' | relative_url }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div style="text-align: center;">
+        Napari visualization, using Stardist and Cellpose segmentation and LIP formulated tracking.
+    </div>
+</div><!-- /.project-img -->
+
+<div class="post-content">
+    <h2>References</h2>
+    [1] J. Bragantini, M. Lange and L. Royer, "Large-Scale Multi-Hypotheses Cell Tracking Using Ultrametric Contours Maps," August 2023.
+    <br><br>[2] U. Schmidt, M. Weigert, C. Broaddus and G. Myers, "Cell Detection with Star-Convex Polygons," in Lecture Notes in Computer Science, Springer International Publishing, 2018, p. 265–273.
+    <br><br>[3] C. Stringer, T. Wang, M. Michaelos and M. Pachitariu, "Cellpose: a generalist algorithm for cellular segmentation," Nature Methods, vol. 18, p. 100–106, December 2020.
+    <br><br>[4] M. Maška, V. Ulman, P. Delgado-Rodriguez, E. Gómez-de-Mariscal, T. Nečasová, F. A. Guerrero Peña, T. I. Ren, E. M. Meyerowitz, T. Scherr, K. Löffler, R. Mikut, T. Guo, Y. Wang, J. P. Allebach, R. Bao, N. M. Al-Shakarji, G. Rahmon, I. E. Toubal, K. Palaniappan, F. Lux, P. Matula, K. Sugawara, K. E. G. Magnusson, L. Aho, A. R. Cohen, A. Arbelle, T. Ben-Haim, T. R. Raviv, F. Isensee, P. F. Jäger, K. H. Maier-Hein, Y. Zhu, C. Ederra, A. Urbiola, E. Meijering, A. Cunha, A. Muñoz-Barrutia, M. Kozubek and C. Ortiz-de-Solórzano, "The Cell Tracking Challenge: 10 years of objective benchmarking," Nature Methods, vol. 20, p. 1010–1020, May 2023.
+    <br><br>[5] D. Reid, "An algorithm for tracking multiple targets," IEEE Transactions on Automatic Control, vol. 24, p. 843–854, December 1979.
+    <br><br>[6] F. Jug, E. Levinkov, C. Blasse, E. W. Myers and B. Andres, "Moral lineage tracing," in Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2016.
+    <br><br>[7] E. Turetken, X. Wang, C. J. Becker, C. Haubold and P. Fua, "Network Flow Integer Programming to Track Elliptical Cells in Time-Lapse Sequences," IEEE Transactions on Medical Imaging, vol. 36, p. 942–951, April 2017.
+    <br><br>[8] K. Jaqaman, D. Loerke, M. Mettlen, H. Kuwata, S. Grinstein, S. L. Schmid and G. Danuser, "Robust single-particle tracking in live-cell time-lapse sequences," Nature Methods, vol. 5, p. 695–702, July 2008.
+</div><!-- /.post-content -->
